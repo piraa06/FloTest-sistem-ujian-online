@@ -1,12 +1,9 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['admin'])) {
-    header("Location: ../login.php");
-    exit;
-}
+require_once '../dummy-data.php';
 
-include "../dummy-data.php";
+$akun = $_SESSION['akun'];
 
 $id = $_GET['id'] ?? null;
 

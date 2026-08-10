@@ -1,102 +1,149 @@
 <?php
-session_start();
 
-if (!isset($_SESSION['admin'])) {
-    header("Location: ../login.php");
-    exit;
-}
-
-include "../dummy-data.php";
+require_once '../dummy-data.php';
 
 $id = $_GET['id'] ?? null;
 
 $data = null;
 
-foreach ($menti as $m) {
+foreach ($_SESSION['siswa'] as $menti) {
 
-    if ($m['id'] == $id) {
-        $data = $m;
+    if ($menti['id'] == $id) {
+        $data = $menti;
         break;
     }
+
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $nama = $_POST['nama'];
-    $email = $_POST['email'];
-    $kelas = $_POST['kelas'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $data) {
 
-    echo "<script>
-            alert('Data menti berhasil diubah!');
-            window.location='ubah.php?id=$id';
-          </script>";
+    foreach ($_SESSION['siswa'] as $index => $menti) {
+
+        if ($menti['id'] == $id) {
+
+            $_SESSION['siswa'][$index]['nama'] = $_POST['nama'];
+            $_SESSION['siswa'][$index]['email'] = $_POST['email'];
+            $_SESSION['siswa'][$index]['kelas'] = $_POST['kelas'];
+
+            break;
+        }
+
+    }
+
+    header('Location: index.php');
+    exit;
+
 }
+
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
     <meta charset="UTF-8">
-    <title>Ubah Menti - FloTest</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Menti - FloTest</title>
+
     <link rel="stylesheet" href="../assets/css/admin.css">
+
 </head>
 
 <body>
 
-<div class="content">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
 
-    <h1>Ubah Data Menti</h1>
+        <h2>FloTest</h2>
 
-    <?php if ($data): ?>
+        <a href="../dashboard.php">
+            Dashboard
+        </a>
 
-        <form method="POST">
+        <a href="../kelola-mentor/index.php">
+            Kelola Mentor
+        </a>
 
-            <label>Nama Menti</label>
+        <a href="index.php" class="active">
+            Kelola Menti
+        </a>
 
-            <input
-                type="text"
-                name="nama"
-                value="<?= $data['nama'] ?>"
-                required
-            >
+        <a href="../kelola-mata-pelajaran/index.php">
+            Kelola Mata Pelajaran
+        </a>
 
-            <label>Email</label>
+        <a href="../kelola-akun/index.php">
+            Kelola Akun
+        </a>
 
-            <input
-                type="email"
-                name="email"
-                value="<?= $data['email'] ?>"
-                required
-            >
+        <a href="../lihat-data-soal.php">
+            Data Soal
+        </a>
 
-            <label>Kelas</label>
+        <a href="../lihat-hasil-ujian.php">
+            Hasil Ujian
+        </a>
 
-            <input
-                type="text"
-                name="kelas"
-                value="<?= $data['kelas'] ?>"
-                required
-            >
+        <a href="../logout.php">
+            Logout
+        </a>
 
-            <button type="submit">
-                Simpan Perubahan
-            </button>
+    </div>
 
-        </form>
 
-    <?php else: ?>
+    <!-- CONTENT -->
+    <div class="content">
 
-        <p>Data menti tidak ditemukan.</p>
+        <h1>Ubah Data Menti</h1>
 
-    <?php endif; ?>
+        <?php if ($data): ?>
 
-    <br>
+            <form method="POST">
 
-    <a href="../dashboard.php">
-        ← Kembali ke Dashboard
-    </a>
+                <label>Nama Menti</label>
 
-</div>
+                <input
+                    type="text"
+                    name="nama"
+                    value="<?= htmlspecialchars($data['nama']) ?>"
+                    required
+                >
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    value="<?= htmlspecialchars($data['email']) ?>"
+                    required
+                >
+
+                <label>Kelas</label>
+
+                <input
+                    type="text"
+                    name="kelas"
+                    value="<?= htmlspecialchars($data['kelas']) ?>"
+                    required
+                >
+
+                <button type="submit">
+                    Simpan Perubahan
+                </button>
+
+            </form>
+
+        <?php else: ?>
+
+            <p>Data menti tidak ditemukan.</p>
+
+        <?php endif; ?>
+
+    </div>
 
 </body>
+
 </html>

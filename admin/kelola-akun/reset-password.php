@@ -7,6 +7,7 @@ if (!isset($_SESSION['admin'])) {
 }
 
 include "../dummy-data.php";
+$akun = $_SESSION['akun'];
 
 $id = $_GET['id'] ?? null;
 

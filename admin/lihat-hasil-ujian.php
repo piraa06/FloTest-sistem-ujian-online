@@ -1,57 +1,122 @@
 <?php
-session_start();
 
-if (!isset($_SESSION['admin'])) {
-    header("Location: login.php");
-    exit;
-}
+require_once 'dummy-data.php';
 
-include "dummy-data.php";
+$hasil = $_SESSION['hasil'];
+
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Hasil Ujian - FloTest</title>
+
     <link rel="stylesheet" href="assets/css/admin.css">
+
 </head>
 
 <body>
 
-<div class="content">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
 
-    <h1>Hasil Ujian</h1>
+        <h2>FloTest</h2>
 
-    <table>
+        <a href="dashboard.php">
+            Dashboard
+        </a>
 
-        <tr>
-            <th>No</th>
-            <th>Nama Menti</th>
-            <th>Ujian</th>
-            <th>Nilai</th>
-            <th>Status</th>
-        </tr>
+        <a href="kelola-mentor/index.php">
+            Kelola Mentor
+        </a>
 
-        <?php foreach ($hasil_ujian as $index => $hasil): ?>
+        <a href="kelola-menti/index.php">
+            Kelola Menti
+        </a>
 
-        <tr>
-            <td><?= $index + 1 ?></td>
-            <td><?= $hasil['nama'] ?></td>
-            <td><?= $hasil['ujian'] ?></td>
-            <td><?= $hasil['nilai'] ?></td>
-            <td><?= $hasil['status'] ?></td>
-        </tr>
+        <a href="kelola-mata-pelajaran/index.php">
+            Kelola Mata Pelajaran
+        </a>
 
-        <?php endforeach; ?>
+        <a href="lihat-data-soal.php">
+            Data Soal
+        </a>
 
-    </table>
+        <a href="lihat-hasil-ujian.php" class="active">
+            Hasil Ujian
+        </a>
 
-    <br>
+        <a href="logout.php">
+            Logout
+        </a>
 
-    <a href="dashboard.php">← Kembali ke Dashboard</a>
+    </div>
 
-</div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <h1>Hasil Ujian</h1>
+
+        <p>Daftar hasil ujian menti FloTest.</p>
+
+
+        <!-- TABLE -->
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>No</th>
+                    <th>Nama Menti</th>
+                    <th>Ujian</th>
+                    <th>Nilai</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <?php foreach ($hasil as $index => $data): ?>
+
+                    <tr>
+
+                        <td>
+                            <?= $index + 1 ?>
+                        </td>
+
+                        <td>
+                            <?= htmlspecialchars($data['siswa']) ?>
+                        </td>
+
+                        <td>
+                            <?= htmlspecialchars($data['ujian']) ?>
+                        </td>
+
+                        <td>
+                            <?= htmlspecialchars($data['nilai']) ?>
+                        </td>
+
+                        <td>
+                            <?= htmlspecialchars($data['status']) ?>
+                        </td>
+
+                    </tr>
+
+                <?php endforeach; ?>
+
+            </tbody>
+
+        </table>
+
+    </div>
 
 </body>
+
 </html>

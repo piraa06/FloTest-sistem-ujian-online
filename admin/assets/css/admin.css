@@ -1,3 +1,7 @@
+/* =========================
+RESET
+========================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -10,15 +14,16 @@ body {
     color: #1e293b;
 }
 
+
 /* =========================
-   LOGIN
+LOGIN
 ========================= */
 
 .login-container {
     width: 420px;
     margin: 100px auto;
     padding: 40px;
-    background: white;
+    background-color: white;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
@@ -39,7 +44,7 @@ body {
 
 
 /* =========================
-   FORM
+FORM
 ========================= */
 
 label {
@@ -51,7 +56,8 @@ label {
     font-size: 14px;
 }
 
-input, select {
+input,
+select {
     width: 100%;
     padding: 12px;
     border: 1px solid #cbd5e1;
@@ -61,9 +67,15 @@ input, select {
     transition: border-color 0.2s;
 }
 
-input:focus {
+input:focus,
+select:focus {
     border-color: #2563eb;
 }
+
+
+/* =========================
+BUTTON DEFAULT
+========================= */
 
 button {
     margin-top: 24px;
@@ -84,7 +96,7 @@ button:hover {
 
 
 /* =========================
-   SIDEBAR
+SIDEBAR
 ========================= */
 
 .sidebar {
@@ -116,14 +128,15 @@ button:hover {
     transition: all 0.2s;
 }
 
-.sidebar a:hover, .sidebar a.active {
+.sidebar a:hover,
+.sidebar a.active {
     background-color: #1e293b;
     color: white;
 }
 
 
 /* =========================
-   CONTENT
+CONTENT
 ========================= */
 
 .content {
@@ -137,9 +150,14 @@ button:hover {
     font-size: 26px;
 }
 
+.content > p {
+    color: #64748b;
+    font-size: 14px;
+}
+
 
 /* =========================
-   DASHBOARD CARD (Statistik Admin)
+DASHBOARD CARD
 ========================= */
 
 .cards {
@@ -173,40 +191,118 @@ button:hover {
 
 
 /* =========================
-   TABLE
+CREATE BUTTON
+========================= */
+
+.btn-create {
+    display: inline-block;
+    padding: 10px 18px;
+    background-color: #2563eb;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    transition: 0.3s;
+}
+
+.btn-create:hover {
+    background-color: #1d4ed8;
+    color: white;
+    text-decoration: none;
+}
+
+
+/* =========================
+TABLE
 ========================= */
 
 table {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 25px;
+    margin-top: 20px;
+    border-collapse: separate;
+    border-spacing: 0;
     background-color: white;
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-
-th,
-td {
-    padding: 14px 16px;
-    border-bottom: 1px solid #f1f5f9;
-    text-align: left;
-    font-size: 14px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
 }
 
 th {
+    padding: 15px 18px;
     background-color: #f8fafc;
     color: #475569;
+    font-size: 13px;
     font-weight: 600;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
 }
 
-tr:hover {
+td {
+    padding: 15px 18px;
+    color: #334155;
+    font-size: 14px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
     background-color: #f8fafc;
 }
 
 
 /* =========================
-   ALERT
+EDIT BUTTON
+========================= */
+
+.btn-edit {
+    display: inline-block;
+    padding: 7px 12px;
+    background-color: #f59e0b;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.btn-edit:hover {
+    background-color: #d97706;
+    color: white;
+    text-decoration: none;
+}
+
+
+/* =========================
+DELETE BUTTON
+========================= */
+
+.btn-delete {
+    display: inline-block;
+    padding: 7px 12px;
+    background-color: #ef4444;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.btn-delete:hover {
+    background-color: #dc2626;
+    color: white;
+    text-decoration: none;
+}
+
+
+/* =========================
+ALERT
 ========================= */
 
 .alert {
@@ -221,7 +317,7 @@ tr:hover {
 
 
 /* =========================
-   LINK UTAMA
+LINK
 ========================= */
 
 a {
@@ -231,4 +327,34 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .content {
+        margin-left: 200px;
+        padding: 25px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .login-container {
+        width: 90%;
+    }
 }

@@ -1,20 +1,20 @@
 <?php
-session_start();
+require_once 'dummy-data.php';
 
-if (!isset($_SESSION['admin'])) {
-    header("Location: login.php");
-    exit;
-}
-
-include "dummy-data.php";
+$mentor = $_SESSION['mentor'];
+$menti = $_SESSION['siswa'];
+$mata_pelajaran = $_SESSION['mata_pelajaran'];
+$hasil_ujian = $_SESSION['hasil'];
 
 ?>
 
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin - FloTest</title>
+
     <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 
@@ -26,15 +26,19 @@ include "dummy-data.php";
 
     <a href="dashboard.php">Dashboard</a>
 
-    <a href="kelola-mentor/create.php">
+    <a href="kelola-mentor/index.php">
         Kelola Mentor
     </a>
 
-    <a href="kelola-menti/create.php">
+    <a href="kelola-menti/index.php">
         Kelola Menti
     </a>
 
-    <a href="kelola-mata-pelajaran/create.php">
+    <a href="kelola-akun/index.php">
+         Kelola Akun
+    </a>
+
+    <a href="kelola-mata-pelajaran/index.php">
         Kelola Mata Pelajaran
     </a>
 

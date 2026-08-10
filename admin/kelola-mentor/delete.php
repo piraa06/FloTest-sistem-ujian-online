@@ -15,7 +15,7 @@ if ($id) {
                 alert('Data mentor berhasil dihapus!');
             }
 
-            window.location='tambah.php';
+            window.location='index.php';
           </script>";
 
 } else {

@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     echo "<script>
             alert('Data mentor berhasil ditambahkan!');
-            window.location='tambah.php';
+            window.location='create.php';
           </script>";
 }
 ?>

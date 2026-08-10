@@ -1,18 +1,19 @@
 <?php
 session_start();
 
+$error = "";
+
 if (isset($_SESSION['admin'])) {
     header("Location: dashboard.php");
     exit;
 }
-
-$error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+    // Dummy akun admin
     if ($username == "admin" && $password == "admin123") {
 
         $_SESSION['admin'] = $username;
@@ -21,16 +22,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
 
     } else {
-        $error = "Username atau password salah!";
+
+        $error = "Username atau password salah.";
     }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>Login Admin - FloTest</title>
+
     <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 
@@ -38,26 +42,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="login-container">
 
-    <h1>FloTest</h1>
-    <p>Login Admin</p>
+    <div class="login-card">
 
-    <?php if ($error): ?>
-        <div class="alert">
-            <?= $error ?>
-        </div>
-    <?php endif; ?>
+        <h1>FloTest</h1>
+        <p>Login Admin</p>
 
-    <form method="POST">
+        <?php if ($error): ?>
+            <div class="alert">
+                <?= $error ?>
+            </div>
+        <?php endif; ?>
 
-        <label>Username</label>
-        <input type="text" name="username" required>
+        <form method="POST">
 
-        <label>Password</label>
-        <input type="password" name="password" required>
+            <label>Username</label>
+            <input type="text" name="username" required>
 
-        <button type="submit">Login</button>
+            <label>Password</label>
+            <input type="password" name="password" required>
 
-    </form>
+            <button type="submit">Login</button>
+
+        </form>
+
+    </div>
 
 </div>
 

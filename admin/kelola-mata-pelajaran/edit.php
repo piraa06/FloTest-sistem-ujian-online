@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 if (!isset($_SESSION['admin'])) {
@@ -6,7 +7,9 @@ if (!isset($_SESSION['admin'])) {
     exit;
 }
 
-include "../dummy-data.php";
+require_once '../dummy-data.php';
+
+$mata_pelajaran = $_SESSION['mata_pelajaran'];
 
 $id = $_GET['id'] ?? null;
 
@@ -27,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     echo "<script>
             alert('Mata pelajaran berhasil diubah!');
-            window.location='ubah.php?id=$id';
+            window.location='index.php?id=$id';
           </script>";
 }
 ?>

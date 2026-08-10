@@ -6,7 +6,8 @@ if (!isset($_SESSION['admin'])) {
     exit;
 }
 
-include "../dummy-data.php";
+require_once 'dummy-data.php';
+$mentor = $_SESSION['mentor'];
 
 $id = $_GET['id'] ?? 1;
 
@@ -27,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     echo "<script>
             alert('Data mentor berhasil diubah!');
-            window.location='ubah.php?id=$id';
+            window.location='index.php?id=$id';
           </script>";
 }
 ?>
